@@ -1,40 +1,47 @@
+"""
+Mergesort Algorithmus.
+Teilt die Liste rekursiv in zwei Hälften, sortiert diese und führt sie zusammen.
+"""
+
 import matplotlib.pyplot as plt
 
 
-def mergeSort(list_to_sort_by_merge):
-    if (
-        len(list_to_sort_by_merge) > 1
-        and len(list_to_sort_by_merge) != 0
-    ):
-        mid = len(list_to_sort_by_merge) // 2
-        left = list_to_sort_by_merge[:mid]
-        right = list_to_sort_by_merge[mid:]
+def mergesort(array):
+    """Sortiert eine Liste in-place mit dem Mergesort-Algorithmus."""
 
-        mergeSort(left)
-        mergeSort(right)
+    if len(array) <= 1:
+        return
 
-        l = 0
-        r = 0
-        i = 0
+    # Liste aufteilen
+    mid = len(array) // 2
+    left = array[:mid]
+    right = array[mid:]
 
-        while l < len(left) and r < len(right):
-            if left[l] <= right[r]:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=left, j=l)
-                l += 1
-            else:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=right, j=r)
-                r += 1
-            i += 1
+    # Hälften rekursiv sortieren
+    mergesort(left)
+    mergesort(right)
 
-        while l < len(left):
-            list_to_sort_by_merge[i] = left[l]
-            l += 1
-            i += 1
+    # Sortierte Hälften zusammenführen
+    li, ri, i = 0, 0, 0
 
-        while r < len(right):
-            list_to_sort_by_merge[i] = right[r]
-            r += 1
-            i += 1
+    while li < len(left) and ri < len(right):
+        if left[li] <= right[ri]:
+            array[i] = left[li]
+            li += 1
+        else:
+            array[i] = right[ri]
+            ri += 1
+        i += 1
+
+    while li < len(left):
+        array[i] = left[li]
+        li += 1
+        i += 1
+
+    while ri < len(right):
+        array[i] = right[ri]
+        ri += 1
+        i += 1
 
 
 def plot_list(array, title):
