@@ -1,11 +1,9 @@
-def ASSIGNMENT(new_list, i, old_list, j):
-    new_list[i] = old_list[j]
+import matplotlib.pyplot as plt
 
 
 def mergeSort(list_to_sort_by_merge):
     if (
         len(list_to_sort_by_merge) > 1
-        and not len(list_to_sort_by_merge) < 1
         and len(list_to_sort_by_merge) != 0
     ):
         mid = len(list_to_sort_by_merge) // 2
@@ -39,13 +37,19 @@ def mergeSort(list_to_sort_by_merge):
             i += 1
 
 
-import matplotlib.pyplot as plt
+def plot_list(array, title):
+    """Zeigt die Liste als Balkendiagramm."""
+    fig, ax = plt.subplots()
+    ax.bar(range(len(array)), array)
+    ax.set_title(title)
+    ax.set_xlabel("Index")
+    ax.set_ylabel("Wert")
+    plt.tight_layout()
+    plt.show()
 
-my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-x = range(len(my_list))
-plt.plot(x, my_list)
-plt.show()
-mergeSort(my_list)
-x = range(len(my_list))
-plt.plot(x, my_list)
-plt.show()
+
+if __name__ == "__main__":
+    my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+    plot_list(my_list, "Vor dem Sortieren")
+    mergesort(my_list)
+    plot_list(my_list, "Nach dem Sortieren")
